@@ -25,7 +25,7 @@ st.caption("Ask natural-language questions about the sales data.")
 with st.sidebar:
     st.header("Status")
     try:
-        health = requests.get(f"{API_URL}/health", timeout=3).json()
+        health = requests.get(f"{API_URL}/health", timeout=3, proxies={"http": None, "https": None}).json()
         st.success(f"✅ API online — {health['rows_in_db']} rows in DB")
     except Exception as e:
         st.error(f"❌ API offline")
@@ -64,7 +64,11 @@ if st.button("Ask", type="primary"):
                     f"{API_URL}/ask",
                     json={"question": question},
                     timeout=TIMEOUT,
+                    proxies={"http": None, "https": None},
                 )
+                
+                    
+                
             except requests.exceptions.ConnectionError:
                 st.error("Cannot reach the API. Is uvicorn running?")
                 st.stop()

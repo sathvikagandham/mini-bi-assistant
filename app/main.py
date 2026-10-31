@@ -10,7 +10,7 @@ Step 4 will add the Groq LLM in front, keeping rules as fallback.
 """
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-
+from fastapi.responses import RedirectResponse
 from app import config
 from app.analytics import format_answer
 from app.db import get_readonly_connection, row_count
@@ -33,6 +33,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+def root():
+    """Redirect the root URL to the Swagger UI documentation."""
+    return RedirectResponse(url="/docs")
 
 @app.get("/health")
 def health():
