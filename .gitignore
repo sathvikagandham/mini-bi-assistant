@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Environment variables — NEVER commit these
+.env
+
+# Database (regenerated via scripts/init_db.py)
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing cache
+.pytest_cache/
+
+# Streamlit secrets
+.streamlit/secrets.toml
